@@ -9,18 +9,18 @@
             <tr>
                 <th width="100px">Nasabah</th>
                 <th width="30px">:</th>
-                <td><?= $tabungan['nama_nasabah'] ?></td>
+                <td><?= $nasabah['nama_nasabah'] ?></td>
                 <th width="180px">NIK</th>
                 <th width="30px">:</th>
-                <td><?= $tabungan['nik'] ?></td>
+                <td><?= $nasabah['nik'] ?></td>
             </tr>
             <tr>
                 <th width="120px">Telp</th>
                 <th>:</th>
-                <td><?= $tabungan['telp'] ?></td>
+                <td><?= $nasabah['telp'] ?></td>
                 <th>Alamat</th>
                 <th>:</th>
-                <td><?= $tabungan['alamat'] ?></td>
+                <td><?= $nasabah['alamat'] ?></td>
             </tr>
             <tr>
                 <th>Total Saldo</th>

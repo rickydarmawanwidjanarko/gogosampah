@@ -42,6 +42,6 @@ class ModelTabungan extends Model
             ->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_tabungan.nasabah_id ', 'left')
             ->where('nasabah_id', $nasabah_id)
             ->get()
-            ->getRowArray();
+            ->getResultArray();
     }
 }

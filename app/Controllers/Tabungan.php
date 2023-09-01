@@ -27,12 +27,15 @@ class Tabungan extends BaseController
     }
 
 
-    public function detailTabungan($id_tabungan)
+    public function detailTabungan($id_nasabah)
     {
+        $data_nasabah = $this->ModelNasabah->detailData($id_nasabah);
+        $data_tabungan = $this->ModelTabungan->detailData($id_nasabah);
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Transaksi Tabungan',
-            'tabungan' => $this->ModelTabungan->detailData($id_tabungan),
+            'nasabah' => $data_nasabah,
+            'tabungan' => $data_tabungan,
         ];
         return view('v_detailTabungan', $data);
     }
