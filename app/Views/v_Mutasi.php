@@ -32,22 +32,22 @@
                     <tr>
                         <th width="70px">#</th>
                         <th>Nama Nasabah</th>
-                        <th>Telp</th>
-                        <th>Alamat</th>
+                        <th>Jenis</th>
+                        <th>Jumlah</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
-                    foreach ($tabungan as $key => $value) { ?>
+                    foreach ($mutasi as $key => $value) { ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $value['nama_nasabah'] ?></td>
-                            <td><?= $value['telp'] ?></td>
-                            <td><?= $value['alamat'] ?></td>
+                            <td><?= $value['jenis'] ?></td>
+                            <td><?= $value['jumlah'] ?></td>
                             <td>
-                                <a href="<?= base_url('Tabungan/DetailTabungan') ?>/<?= $value['id_nasabah'] ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
-                                <button class="btn btn-flat btn-danger btn-xs" data-toggle="modal" data-target="#delete<?= $value['id_tabungan'] ?>"><i class="fas fa-trash"></i></button>
+                                <a href="<?= base_url('Mutasi/DetailMutasi') ?>/<?= $value['id_nasabah'] ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-flat btn-danger btn-xs" data-toggle="modal" data-target="#delete<?= $value['id_mutasi'] ?>"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -62,20 +62,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Tabungan</h4>
+                <h4 class="modal-title">Tambah Mutasi</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php echo form_open_multipart('Tabungan/insertData');
-            helper('text');
-            $tgl_tabungan = date('Y-m-d');
+            <?php echo form_open_multipart('Mutasi/insertData');
             ?>
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Tanggal Tabungan</label>
-                    <input type="text" name="tgl_masuk" value="<?= $tgl_tabungan ?>" class="form-control" readonly>
-                </div>
                 <div class="form-group">
                     <label>Nasabah</label>
                     <select name="nasabah_id" class="form-control">
@@ -84,6 +78,16 @@
                             <option value="<?= $value['id_nasabah'] ?>"><?= $value['nama_nasabah'] ?></option>
                         <?php } ?>
                     </select>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Jenis Transaksi</label>
+                        <select name="jenis" class="form-control">
+                            <option value="">--Pilih Jenis Transaksi--</option>
+                            <option value="1">Debit</option>
+                            <option value="2">Kredit</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Nominal</label>
@@ -108,12 +112,12 @@
 
 
 <!-- Modal Delete -->
-<?php foreach ($tabungan as $key => $value) { ?>
-    <div class="modal fade" id="delete<?= $value['id_tabungan'] ?>">
+<?php foreach ($mutasi as $key => $value) { ?>
+    <div class="modal fade" id="delete<?= $value['id_mutasi'] ?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus Nasabah</h4>
+                    <h4 class="modal-title">Hapus Mutasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,7 +127,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <a href="<?= base_url('Tabungan/deleteData/' . $value['id_tabungan']) ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="<?= base_url('Mutasi/deleteData/' . $value['id_mutasi']) ?>" class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </div>
             <!-- /.modal-content -->

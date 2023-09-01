@@ -25,7 +25,7 @@
             <tr>
                 <th>Total Saldo</th>
                 <th>:</th>
-                <td>total saldo</td>
+                <td><?= $tot_saldo['nominal_masuk'] ?></td>
             </tr>
         </table>
     </div>
@@ -43,6 +43,7 @@
                         <th>#</th>
                         <th>Tanggal Transaksi</th>
                         <th>Nominal</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,9 @@
                             <td><?= $no++ ?></td>
                             <td><?= $value['tgl_masuk'] ?></td>
                             <td><?= $value['nominal_masuk'] ?></td>
+                            <td>
+                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_tabungan'] ?>"><i class="fas fa-edit"></i></button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -61,5 +65,38 @@
     </div>
 </div>
 
+<!-- Modal Edit -->
+<?php foreach ($tabungan as $key => $value) { ?>
+    <div class="modal fade" id="edit<?= $value['id_tabungan'] ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Tabungan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php echo form_open('Tabungan/editData/' . $value['id_tabungan']) ?>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tanggal Transaksi</label>
+                        <input name="tgl_masuk" value="<?= $value['tgl_masuk'] ?>" class="form-control" placeholder="Tanggal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Nominal</label>
+                        <input name="nominal_masuk" value="<?= $value['nominal_masuk'] ?>" class="form-control" placeholder="Nominal" required>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                </div>
+                <?php echo form_close() ?>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+<?php } ?>
 
 <?= $this->endSection() ?>

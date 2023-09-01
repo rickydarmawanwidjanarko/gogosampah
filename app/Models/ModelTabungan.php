@@ -24,6 +24,7 @@ class ModelTabungan extends Model
     public function editData($data)
     {
         $this->db->table('tbl_tabungan')
+            ->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_tabungan.nasabah_id ', 'left')
             ->where('id_tabungan', $data['id_tabungan'])
             ->update($data);
     }
@@ -43,5 +44,14 @@ class ModelTabungan extends Model
             ->where('nasabah_id', $nasabah_id)
             ->get()
             ->getResultArray();
+    }
+
+    public function totalSaldo($nasabah_id)
+    {
+        return $this->db->table('tbl_tabungan')
+            ->selectSum('nominal_masuk')
+            ->where('nasabah_id', $nasabah_id)
+            ->get()
+            ->getRowArray();
     }
 }

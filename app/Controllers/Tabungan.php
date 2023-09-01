@@ -31,12 +31,15 @@ class Tabungan extends BaseController
     {
         $data_nasabah = $this->ModelNasabah->detailData($id_nasabah);
         $data_tabungan = $this->ModelTabungan->detailData($id_nasabah);
+        $total_saldo = $this->ModelTabungan->totalSaldo($id_nasabah);
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Transaksi Tabungan',
             'nasabah' => $data_nasabah,
             'tabungan' => $data_tabungan,
+            'tot_saldo' => $total_saldo,
         ];
+        // dd($data);
         return view('v_detailTabungan', $data);
     }
 
@@ -52,13 +55,12 @@ class Tabungan extends BaseController
         return redirect()->to('/Tabungan');
     }
 
-    public function editData($id_lembaga)
+    public function editData($id_tabungan)
     {
         $data = [
-            'id_lembaga' => $id_lembaga,
-            'nama_lembaga' => $this->request->getPost('nama_lembaga'),
-            'telp' => $this->request->getPost('telp'),
-            'alamat' => $this->request->getPost('alamat'),
+            'id_tabungan' => $id_tabungan,
+            'nominal_masuk' => $this->request->getPost('nominal_masuk'),
+            'tgl_masuk' => $this->request->getPost('tgl_masuk'),
         ];
         $this->ModelTabungan->editData($data);
         session()->setFlashdata('edit', 'Data Berhasil Di Ubah.');
@@ -66,11 +68,10 @@ class Tabungan extends BaseController
     }
 
 
-    public function deleteData($id_lembaga)
+    public function deleteData($id_tabungan)
     {
-        $pelanggan = $this->ModelTabungan->detailData($id_lembaga);
         $data = [
-            'id_lembaga' => $id_lembaga,
+            'id_tabungan' => $id_tabungan,
         ];
         $this->ModelTabungan->deleteData($data);
         session()->setFlashdata('delete', 'Data Berhasil Di Delete.');
