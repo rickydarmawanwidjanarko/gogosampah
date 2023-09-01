@@ -78,6 +78,7 @@
                 </div>
                 <?php echo form_open('Tabungan/editData/' . $value['id_tabungan']) ?>
                 <div class="modal-body">
+                    <input type="hidden" value="<?= $nasabah['id_nasabah']; ?>" name="id_nasabah">
                     <div class="form-group">
                         <label>Tanggal Transaksi</label>
                         <input name="tgl_masuk" value="<?= $value['tgl_masuk'] ?>" class="form-control" placeholder="Tanggal" readonly>

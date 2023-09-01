@@ -57,6 +57,7 @@ class Tabungan extends BaseController
 
     public function editData($id_tabungan)
     {
+        $id_nasabah = $this->request->getPost('id_nasabah');
         $data = [
             'id_tabungan' => $id_tabungan,
             'nominal_masuk' => $this->request->getPost('nominal_masuk'),
@@ -64,7 +65,7 @@ class Tabungan extends BaseController
         ];
         $this->ModelTabungan->editData($data);
         session()->setFlashdata('edit', 'Data Berhasil Di Ubah.');
-        return redirect()->to('/Tabungan');
+        return redirect()->to('/Tabungan/DetailTabungan/' . $id_nasabah);
     }
 
 
