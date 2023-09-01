@@ -43,7 +43,17 @@
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $value['nama_nasabah'] ?></td>
-                            <td><?= $value['jenis'] ?></td>
+                            <td><?php switch ($value['jenis']) {
+                                    case '1':
+                                        echo 'Debit';
+                                        break;
+                                    case '2':
+                                        echo 'Kredit';
+                                        break;
+                                    default:
+                                        echo '';
+                                        break;
+                                } ?></td>
                             <td><?= $value['jumlah'] ?></td>
                             <td>
                                 <a href="<?= base_url('Mutasi/DetailMutasi') ?>/<?= $value['id_nasabah'] ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
@@ -68,8 +78,14 @@
                 </button>
             </div>
             <?php echo form_open_multipart('Mutasi/insertData');
+            helper('text');
+            $dibuat_tgl = date('Y-m-d H:i:s');
             ?>
             <div class="modal-body">
+                <div class="form-group">
+                    <label>Tanggal Mutasi</label>
+                    <input type="text" name="created_at" value="<?= $dibuat_tgl ?>" class="form-control" readonly>
+                </div>
                 <div class="form-group">
                     <label>Nasabah</label>
                     <select name="nasabah_id" class="form-control">
@@ -95,7 +111,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp. </div>
                         </div>
-                        <input type="text" class="form-control" name="nominal_masuk" placeholder="Nominal">
+                        <input type="text" class="form-control" name="jumlah" placeholder="Nominal">
                     </div>
                 </div>
             </div>

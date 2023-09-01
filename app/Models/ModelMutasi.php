@@ -24,6 +24,8 @@ class ModelMutasi extends Model
     public function editData($data)
     {
         $this->db->table('tbl_mutasi')
+            ->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_mutasi.nasabah_id ', 'left')
+            ->join('tbl_tabungan', 'tbl_tabungan.nasabah_id = tbl_mutasi.nasabah_id ', 'left')
             ->where('id_mutasi', $data['id_mutasi'])
             ->update($data);
     }
@@ -45,12 +47,32 @@ class ModelMutasi extends Model
             ->getResultArray();
     }
 
-    // public function totalSaldo($nasabah_id)
-    // {
-    //     return $this->db->table('tbl_mutasi')
-    //         ->selectSum('nominal_masuk')
-    //         ->where('nasabah_id', $nasabah_id)
-    //         ->get()
-    //         ->getRowArray();
-    // }
+    public function totalSaldo($nasabah_id)
+    {
+        return $this->db->table('tbl_mutasi')
+            ->selectSum('nominal_masuk')
+            ->where('nasabah_id', $nasabah_id)
+            ->get()
+            ->getRowArray();
+    }
+
+    public function totalDebit($nasabah_id)
+    {
+        return $this->db->table('tbl_mutasi')
+            ->selectSum('jumlah')
+            ->where('jenis', '1')
+            ->where('nasabah_id', $nasabah_id)
+            ->get()
+            ->getRowArray();
+    }
+
+    public function totalKredit($nasabah_id)
+    {
+        return $this->db->table('tbl_mutasi')
+            ->selectSum('jumlah')
+            ->where('jenis', '2')
+            ->where('nasabah_id', $nasabah_id)
+            ->get()
+            ->getRowArray();
+    }
 }
