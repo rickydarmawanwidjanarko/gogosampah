@@ -114,11 +114,13 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        
                         <label>Jenis Sampah</label>
                         <select name="id_jenis_sampah" class="form-control">
                             <option value="0">--Pilih Jenis Sampah--</option>
-                            <?php foreach ($jenissampah as $key => $s) { ?>
-                                <option value="<?= $s['id_jenis_sampah'] ?>" <?= $jenissampah['id_jenis_sampah'] == $s['id_jenis_sampah'] ? 'selected' : '' ?>>
+                            <?php 
+                            foreach ($jenissampah as $key => $s) { ?>
+                                <option value="<?= $s['id_jenis_sampah'] ?>" <?= $s['id_jenis_sampah'] == $s['id_jenis_sampah'] ? 'selected' : '' ?>>
                                     <?= $s['jenis_sampah'] ?>
                                 </option>
                             <?php } ?>

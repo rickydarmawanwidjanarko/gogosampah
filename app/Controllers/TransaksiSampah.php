@@ -66,7 +66,7 @@ class TransaksiSampah extends BaseController
         $data_nasabah = $this->ModelNasabah->detailData($id_nasabah);
         $data_tabungan = $this->ModelTabungan->detailData($id_nasabah);
         $data_transaksi_sampah = $this->ModelTransaksiSampah->detailData($id_nasabah);
-        $data_jenis_sampah = $this->ModelJenisSampah->detailData($id_nasabah);
+        $data_jenis_sampah = $this->ModelJenisSampah->getAllData();
         $total_saldo = $this->ModelTabungan->totalSaldo($id_nasabah);
         $total_debit = $this->ModelTransaksiSampah->totalDebit($id_nasabah);
         $total_kredit = $this->ModelTransaksiSampah->totalKredit($id_nasabah);
