@@ -120,7 +120,7 @@
                             <option value="0">--Pilih Jenis Sampah--</option>
                             <?php 
                             foreach ($jenissampah as $key => $s) { ?>
-                                <option value="<?= $s['id_jenis_sampah'] ?>" <?= $s['id_jenis_sampah'] == $s['id_jenis_sampah'] ? 'selected' : '' ?>>
+                                <option value="<?= $s['id_jenis_sampah'] ?>" <?= $s['id_jenis_sampah'] == $value['id_jenis_sampah'] ? 'selected' : '' ?>>
                                     <?= $s['jenis_sampah'] ?>
                                 </option>
                             <?php } ?>
