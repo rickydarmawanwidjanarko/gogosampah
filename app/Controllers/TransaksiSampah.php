@@ -46,14 +46,18 @@ class TransaksiSampah extends BaseController
         ];
         $nasabah = $this->ModelNasabah->detailData($id_nasabah);
 
+        $newSaldo = $nasabah['saldo'];
         if ($jenis == 1) {
             $newSaldo = $nasabah['saldo'] - $jml;
-            $dataUpdate = [
-                'id_nasabah' => $id_nasabah,
-                'saldo' => $newSaldo
-            ];
-            $this->ModelNasabah->editData($dataUpdate);
+        } else {
+            $newSaldo = $nasabah['saldo'] + $jml;
         }
+
+        $dataUpdate = [
+            'id_nasabah' => $id_nasabah,
+            'saldo' => $newSaldo
+        ];
+            $this->ModelNasabah->editData($dataUpdate);
         $this->ModelTransaksiSampah->insertData($data);
 
 
