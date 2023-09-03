@@ -123,41 +123,26 @@ $db = \Config\Database::connect();
                                     <p>Dashboard</p>
                                 </a>
                             </li>
-                            <li class="nav-item has-treeview">
-                                <a href="<?= base_url('Nasabah') ?>" class="nav-link">
-                                    <p>Nasabah</p>
-                                </a>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="<?= base_url('Lembaga') ?>" class="nav-link">
-                                    <p>Lembaga</p>
-                                </a>
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="<?= base_url('Pelanggan') ?>" class="nav-link">
-                                    <p>Pelanggan</p>
-                                </a>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <p>
-                                        Transaksi
+                                        Master Data Transaksi
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Tabungan') ?>" class="nav-link">
-                                            <p>Transaksi Tabungan</p>
+                                        <a href="<?= base_url('Mutasi') ?>" class="nav-link">
+                                            <p>Transaksi Sampah</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Mutasi') ?>" class="nav-link">
-                                            <p>Transaksi Tarik Dana</p>
+                                        <a href="<?= base_url('Tabungan') ?>" class="nav-link">
+                                            <p>Transaksi Tabungan</p>
                                         </a>
                                     </li>
-
 
                                     <li class="nav-item has-treeview">
                                         <a href="<?= base_url('PendidikanTerakhir') ?>" class="nav-link">
@@ -172,6 +157,38 @@ $db = \Config\Database::connect();
                                     </li>
                                 </ul>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <p>
+                                        Master Data
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('Nasabah') ?>" class="nav-link">
+                                            <p>Data Nasabah</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('Lembaga') ?>" class="nav-link">
+                                            <p>Data Lembaga</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('Pelanggan') ?>" class="nav-link">
+                                            <p>Data Pelanggan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('Pengguna') ?>" class="nav-link">
+                                            <p>Data Pengguna</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <p>
@@ -224,24 +241,25 @@ $db = \Config\Database::connect();
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <p>
-                                        Pengaturan
+                                        Setting Aplikasi
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('JenisSampah') ?>" class="nav-link">
+                                            <p>Jenis Sampah</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item has-treeview">
                                         <a href="<?= base_url('Level') ?>" class="nav-link">
-                                            <p>Level</p>
+                                            <p>Data Level</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li class="nav-item has-treeview">
-                                <a href="<?= base_url('Pengguna') ?>" class="nav-link">
-                                    <p>Pengguna</p>
-                                </a>
-                            </li>
 
                             <li class="nav-item has-treeview">
                                 <a href="<?= base_url('Auth/logout') ?>" class="nav-link">
