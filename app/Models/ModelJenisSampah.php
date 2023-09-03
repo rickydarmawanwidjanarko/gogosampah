@@ -39,6 +39,6 @@ class ModelJenisSampah extends Model
         return $this->db->table('tbl_jenis_sampah')
             ->where('id_jenis_sampah', $id_jenis_sampah)
             ->get()
-            ->getRowArray();
+            ->getResultArray();
     }
 }

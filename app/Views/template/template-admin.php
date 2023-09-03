@@ -133,7 +133,7 @@ $db = \Config\Database::connect();
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Mutasi') ?>" class="nav-link">
+                                        <a href="<?= base_url('TransaksiSampah') ?>" class="nav-link">
                                             <p>Transaksi Sampah</p>
                                         </a>
                                     </li>
