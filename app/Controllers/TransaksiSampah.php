@@ -7,6 +7,7 @@ use App\Models\ModelTransaksiSampah;
 use App\Models\ModelNasabah;
 use App\Models\ModelTabungan;
 use App\Models\ModelJenisSampah;
+use App\Models\ModelHargaSampah;
 
 class TransaksiSampah extends BaseController
 {
@@ -16,6 +17,7 @@ class TransaksiSampah extends BaseController
         $this->ModelNasabah = new ModelNasabah();
         $this->ModelTabungan = new ModelTabungan();
         $this->ModelJenisSampah = new ModelJenisSampah();
+        $this->ModelHargaSampah = new ModelHargaSampah();
         helper('form');
     }
 
@@ -36,28 +38,36 @@ class TransaksiSampah extends BaseController
         $id_nasabah = $this->request->getPost('id_nasabah');
         $jenis = $this->request->getPost('jenis');
         $jml = !empty($this->request->getPost('jumlah')) ? $this->request->getPost('jumlah') : $this->request->getPost('berat');
-
+        $id_jenis_sampah = $this->request->getPost('id_jenis_sampah');
+        
         $data = [
             'nasabah_id' => $id_nasabah,
-            'jenis' => $jml,
+            'jenis' => $jenis,
             'jumlah' => $jml,
-            'id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
+            'id_jenis_sampah' => $id_jenis_sampah,
             'created_at' => date('Y-m-d H:i:s'),
         ];
         $nasabah = $this->ModelNasabah->detailData($id_nasabah);
+        
+        $harga_sampah = $this->ModelHargaSampah->detailDataByJenis($id_jenis_sampah);
+
+        if (empty($harga_sampah)) {
+            session()->setFlashdata('delete', 'Jenis Sampah Tidak Ditemukan !');
+            return redirect()->to('/TransaksiSampah');
+        }
 
         $newSaldo = $nasabah['saldo'];
         if ($jenis == 1) {
-            $newSaldo = $nasabah['saldo'] - $jml;
+            $newSaldo = ($nasabah['saldo'] - $jml);
         } else {
-            $newSaldo = $nasabah['saldo'] + $jml;
+            $newSaldo = ($nasabah['saldo'] + ($jml * $harga_sampah['harga']));
         }
 
         $dataUpdate = [
             'id_nasabah' => $id_nasabah,
             'saldo' => $newSaldo
         ];
-            $this->ModelNasabah->editData($dataUpdate);
+        $this->ModelNasabah->editData($dataUpdate);
         $this->ModelTransaksiSampah->insertData($data);
 
 

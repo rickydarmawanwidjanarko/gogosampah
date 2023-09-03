@@ -75,7 +75,7 @@
                                     if ($value['jenis'] == 2) {
                                         echo $value['jumlah'].' Kg';
                                     } else {
-                                        echo $value['jumlah'];
+                                        echo format_rupiah($value['jumlah']);
                                     }
                                 ?>
                             </td>

@@ -42,4 +42,12 @@ class ModelHargaSampah extends Model
             ->get()
             ->getResultArray();
     }
+
+    public function detailDataByJenis($id_jenis_sampah)
+    {
+        return $this->db->table('tbl_harga_sampah')
+            ->where('id_jenis_sampah', $id_jenis_sampah)
+            ->get()
+            ->getRowArray();
+    }
 }
