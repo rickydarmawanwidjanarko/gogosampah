@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ModelJenisSampah;
-use App\Models\ModelSettingHarga;
+use App\Models\ModelHargaSampah;
 
 class SettingHarga extends BaseController
 {
     public function __construct()
     {
         $this->ModelJenisSampah = new ModelJenisSampah();
-        $this->ModelSettingHarga = new ModelSettingHarga();
+        $this->ModelHargaSampah = new ModelHargaSampah();
         helper('form');
     }
 
@@ -21,7 +21,7 @@ class SettingHarga extends BaseController
             'title' => 'Gogogreen',
             'subtitle' => 'Setting Harga',
             'jenissampah' => $this->ModelJenisSampah->getAllData(),
-            'settingharga' => $this->ModelSettingHarga->getAllData(),
+            'settingharga' => $this->ModelHargaSampah->getAllData(),
         ];
         return view('v_SettingHarga', $data);
     }
@@ -33,19 +33,20 @@ class SettingHarga extends BaseController
             'berat' => $this->request->getPost('berat'),
             'harga' => $this->request->getPost('harga'),
         ];
-        $this->ModelJenisSampah->insertData($data);
+        $this->ModelHargaSampah->insertData($data);
         session()->setFlashdata('tambah', 'Data Berhasil Di Tambahkan.');
         return redirect()->to('/SettingHarga');
     }
 
-    public function editData($id_jenis_sampah)
+    public function editData($id_harga_sampah)
     {
         $data = [
-            'id_jenis_sampah' => $id_jenis_sampah,
-            'jenis_sampah' => $this->request->getPost('nama_lembaga'),
+            'id_harga_sampah' => $id_harga_sampah,
+            // 'id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
+            'berat' => $this->request->getPost('berat'),
             'harga' => $this->request->getPost('harga'),
         ];
-        $this->ModelJenisSampah->editData($data);
+        $this->ModelHargaSampah->editData($data);
         session()->setFlashdata('edit', 'Data Berhasil Di Ubah.');
         return redirect()->to('/SettingHarga');
     }

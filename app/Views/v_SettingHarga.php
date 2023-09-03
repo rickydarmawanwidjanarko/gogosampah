@@ -55,8 +55,8 @@
                             <td><?= $value['berat'] ?></td>
                             <td><?= $value['harga'] ?></td>
                             <td>
-                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_meta'] ?>"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-flat btn-danger btn-xs" data-toggle="modal" data-target="#delete<?= $value['id_meta'] ?>"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_harga_sampah'] ?>"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-flat btn-danger btn-xs" data-toggle="modal" data-target="#delete<?= $value['id_harga_sampah'] ?>"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -112,7 +112,7 @@
 
 <!-- Modal Edit -->
 <?php foreach ($settingharga as $key => $value) { ?>
-    <div class="modal fade" id="edit<?= $value['id_meta'] ?>">
+    <div class="modal fade" id="edit<?= $value['id_harga_sampah'] ?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -121,8 +121,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?php echo form_open('SettingHarga/editData/' . $value['id_meta']) ?>
+                <?php echo form_open('SettingHarga/editData/' . $value['id_harga_sampah']) ?>
+                
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label>Berat</label>
+                        <input name="berat" class="form-control" placeholder="Berat" value="<?= $value['berat'] ?>" required>
+                    </div>
                     <div class="form-group">
                         <label>Harga</label>
                         <input name="harga" value="<?= $value['harga'] ?>" class="form-control" placeholder="Harga" required>
@@ -143,7 +148,7 @@
 
 <!-- Modal Delete -->
 <?php foreach ($settingharga as $key => $value) { ?>
-    <div class="modal fade" id="delete<?= $value['id_meta'] ?>">
+    <div class="modal fade" id="delete<?= $value['id_harga_sampah'] ?>">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -157,7 +162,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <a href="<?= base_url('SettingHarga/deleteData/' . $value['id_meta']) ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="<?= base_url('SettingHarga/deleteData/' . $value['id_harga_sampah']) ?>" class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </div>
             <!-- /.modal-content -->
