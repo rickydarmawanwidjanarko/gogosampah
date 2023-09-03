@@ -34,6 +34,12 @@ $db = \Config\Database::connect();
     <!-- daterange picker -->
     <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/daterangepicker/daterangepicker.css">
 
+    <!-- Table -->
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -253,6 +259,12 @@ $db = \Config\Database::connect();
                                     </li>
 
                                     <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('SettingHarga') ?>" class="nav-link">
+                                            <p>Setting Harga</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item has-treeview">
                                         <a href="<?= base_url('Level') ?>" class="nav-link">
                                             <p>Data Level</p>
                                         </a>
@@ -343,6 +355,39 @@ $db = \Config\Database::connect();
     <script src="<?= base_url() ?>/template/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?= base_url() ?>/template/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Table -->
+    <!-- DataTables  & Plugins -->
+    <script src="<?= base_url() ?>/template/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/jszip/jszip.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?= base_url() ?>/template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 
     <script>
         function bacaGambar(input) {

@@ -39,18 +39,20 @@
     <div class="card card-success">
         <div class="card-header">
             <h3 class="card-title">Detail <?= $subtitle ?></h3>
+            <div class="card-tools">
+                <button class="btn btn-flat btn-dark btn-xs" data-toggle="modal" data-target="#add"><i class="fas fa-plus"></i> Add</button>
+            </div>
         </div>
-        <div class="card-body p-0">
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tanggal Transaksi Sampah</th>
-                        <th>Jenis Transaksi</th>
-                        <th>Jenis Sampah</th>
-                        <th>Nominal</th>
-                        <th>Action</th>
-                    </tr>
+        <div class="card-body">
+            <table id="example2" class="table table-bordered table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Tanggal Transaksi Sampah</th>
+                    <th>Jenis Transaksi</th>
+                    <th>Jenis Sampah</th>
+                    <th>Nominal</th>
+                    <th>Action</th>
+                </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
@@ -81,6 +83,69 @@
             </table>
         </div>
     </div>
+</div>
+
+<!-- Modal Add -->
+<div class="modal fade" id="add">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Transaksi Sampah</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php echo form_open_multipart('TransaksiSampah/insertData');
+            helper('text');
+            $dibuat_tgl = date('Y-m-d H:i:s');
+            ?>
+            <div class="modal-body">
+                <input type="hidden" value="<?= $nasabah['id_nasabah']; ?>" name="id_nasabah">
+                <div class="form-group">
+                    <label>Tanggal Transaksi Sampah</label>
+                    <input type="text" name="created_at" value="<?= $dibuat_tgl ?>" class="form-control" readonly>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Jenis Transaksi</label>
+                        <select name="jenis" class="form-control">
+                            <option value="">--Pilih Jenis Transaksi--</option>
+                            <option value="1">Debit</option>
+                            <option value="2">Kredit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Jenis Sampah</label>
+                        <select name="id_jenis_sampah" class="form-control">
+                            <option value="0">--Pilih Jenis Sampah--</option>
+                            <?php foreach ($jenissampah as $key => $value) { ?>
+                                <option value="<?= $value['id_jenis_sampah'] ?>"><?= $value['jenis_sampah'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Berat</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="jumlah" placeholder="Berat">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Kg </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+            </div>
+            <?php echo form_close() ?>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 
 <!-- Modal Edit -->
@@ -114,11 +179,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        
+
                         <label>Jenis Sampah</label>
                         <select name="id_jenis_sampah" class="form-control">
                             <option value="0">--Pilih Jenis Sampah--</option>
-                            <?php 
+                            <?php
                             foreach ($jenissampah as $key => $s) { ?>
                                 <option value="<?= $s['id_jenis_sampah'] ?>" <?= $s['id_jenis_sampah'] == $value['id_jenis_sampah'] ? 'selected' : '' ?>>
                                     <?= $s['jenis_sampah'] ?>
@@ -137,6 +202,31 @@
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                 </div>
                 <?php echo form_close() ?>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+<?php } ?>
+
+<!-- Modal Delete -->
+<?php foreach ($transaksisampah as $key => $value) { ?>
+    <div class="modal fade" id="delete<?= $value['id_transaksi_sampah'] ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Hapus Mutasi</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda Ingin Menghapus Data <b><?= $value['username_nasabah'] ?></b> ?
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <a href="<?= base_url('TransaksiSampah/deleteData/' . $value['id_transaksi_sampah']) ?>" class="btn btn-danger btn-sm">Delete</a>
+                </div>
             </div>
             <!-- /.modal-content -->
         </div>
