@@ -30,7 +30,7 @@
                         <tr>
                             <th width="70px">#</th>
                             <th>Nama Nasabah</th>
-                            <th>saldo</th>
+                            <th>Saldo</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
