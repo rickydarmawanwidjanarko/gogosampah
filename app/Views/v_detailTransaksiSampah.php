@@ -25,11 +25,9 @@
             <tr>
                 <th>Total Saldo</th>
                 <th>:</th>
-                <td><?php if ($transaksisampah[0]['jenis'] == '1') { ?>
-                        <?= $tot_saldo['nominal_masuk'] + $tot_debit['jumlah'] ?>
-                    <?php  } else { ?>
-                        <?= $tot_saldo['nominal_masuk'] - $tot_kredit['jumlah'] ?>
-                    <?php  } ?></td>
+                <td>
+                    <?= $nasabah['saldo']; ?>
+                </td>
             </tr>
         </table>
     </div>
@@ -50,8 +48,8 @@
                     <th>Tanggal Transaksi Sampah</th>
                     <th>Jenis Transaksi</th>
                     <th>Jenis Sampah</th>
-                    <th>Nominal</th>
-                    <th>Action</th>
+                    <th>Jumlah</th>
+                    <!-- <th>Action</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -72,10 +70,18 @@
                                         break;
                                 } ?></td>
                             <td><?= $value['jenis_sampah'] ?></td>
-                            <td><?= $value['jumlah'] ?></td>
                             <td>
-                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_transaksi_sampah'] ?>"><i class="fas fa-edit"></i></button>
+                                <?php 
+                                    if ($value['jenis'] == 2) {
+                                        echo $value['jumlah'].' Kg';
+                                    } else {
+                                        echo $value['jumlah'];
+                                    }
+                                ?>
                             </td>
+                            <!-- <td>
+                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_transaksi_sampah'] ?>"><i class="fas fa-edit"></i></button>
+                            </td> -->
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -108,7 +114,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Jenis Transaksi</label>
-                        <select name="jenis" class="form-control">
+                        <select name="jenis" class="form-control sel-jenis">
                             <option value="">--Pilih Jenis Transaksi--</option>
                             <option value="1">Debit</option>
                             <option value="2">Kredit</option>
@@ -127,13 +133,20 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group canvas-berat" style="display: none;">
                     <label>Berat</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="jumlah" placeholder="Berat">
+                        <input type="text" class="form-control" name="berat" placeholder="Berat">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Kg </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group canvas-jumlah" style="display: none;">
+                    <label>Jumlah</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah">
                     </div>
                 </div>
             </div>
@@ -173,7 +186,7 @@
                     </div>
                     <div class="form-group">
                         <label>Jenis Transaksi Sampah</label>
-                        <select name="jenis" class="form-control" required>
+                        <select name="jenis" class="form-control sel-jenis" required>
                             <option value="1" <?= $value['jenis'] == 'Debit' ? 'selected' : '' ?>>Debit</option>
                             <option value="2" <?= $value['jenis'] == 'Kredit' ? 'selected' : '' ?>>Kredit</option>
                         </select>
@@ -234,4 +247,20 @@
     </div>
 <?php } ?>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script>
+    // alert(1)
+    $('.sel-jenis').change(function(e) {
+        let v = $(this).val()
+        if (v == 1) {
+            $('.canvas-berat').hide()
+            $('.canvas-jumlah').show()
+        } else {
+            $('.canvas-jumlah').hide()
+            $('.canvas-berat').show()
+        }
+    })
+</script>
 <?= $this->endSection() ?>

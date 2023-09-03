@@ -33,14 +33,30 @@ class TransaksiSampah extends BaseController
 
     public function insertData()
     {
+        $id_nasabah = $this->request->getPost('id_nasabah');
+        $jenis = $this->request->getPost('jenis');
+        $jml = !empty($this->request->getPost('jumlah')) ? $this->request->getPost('jumlah') : $this->request->getPost('berat');
+
         $data = [
-            'nasabah_id' => $this->request->getPost('nasabah_id'),
-            'jenis' => $this->request->getPost('jenis'),
-            'jumlah' => $this->request->getPost('jumlah'),
+            'nasabah_id' => $id_nasabah,
+            'jenis' => $jml,
+            'jumlah' => $jml,
             'id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
-            'created_at' => $this->request->getPost('created_at'),
+            'created_at' => date('Y-m-d H:i:s'),
         ];
+        $nasabah = $this->ModelNasabah->detailData($id_nasabah);
+
+        if ($jenis == 1) {
+            $newSaldo = $nasabah['saldo'] - $jml;
+            $dataUpdate = [
+                'id_nasabah' => $id_nasabah,
+                'saldo' => $newSaldo
+            ];
+            $this->ModelNasabah->editData($dataUpdate);
+        }
         $this->ModelTransaksiSampah->insertData($data);
+
+
         session()->setFlashdata('tambah', 'Data Berhasil Di Tambahkan.');
         return redirect()->to('/TransaksiSampah');
     }
@@ -53,12 +69,11 @@ class TransaksiSampah extends BaseController
             'jenis' => $this->request->getPost('jenis'),
             'jumlah' => $this->request->getPost('jumlah'),
             'id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
-            'created_at' => $this->request->getPost('created_at'),
-            'updated_at' => $this->request->getPost('updated_at'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
         $this->ModelTransaksiSampah->editData($data);
         session()->setFlashdata('edit', 'Data Berhasil Di Ubah.');
-        return redirect()->to('/TransaksiSampah/DetailMutasi/' . $id_nasabah);
+        return redirect()->to('/TransaksiSampah/detailTransaksiSampah/' . $id_nasabah);
     }
 
     public function detailTransaksiSampah($id_nasabah)

@@ -40,7 +40,7 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value['nama_nasabah'] ?></td>
-                                <td>saldo</td>
+                                <td><?= empty($value['saldo']) ? 0 : $value['saldo']; ?></td>
                                 <td>
                                     <a href="<?= base_url('TransaksiSampah/detailTransaksiSampah') ?>/<?= $value['id_nasabah'] ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
                                 </td>

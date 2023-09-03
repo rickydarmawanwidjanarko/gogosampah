@@ -39,6 +39,7 @@ class Nasabah extends BaseController
             'telp' => $this->request->getPost('telp'),
             'alamat' => $this->request->getPost('alamat'),
             'foto' => $nama_file,
+            'saldo' => 0
         ];
         $file->move('foto/', $nama_file);
         $this->ModelNasabah->insertData($data);

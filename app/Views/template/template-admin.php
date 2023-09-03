@@ -144,11 +144,11 @@ $db = \Config\Database::connect();
                                         </a>
                                     </li>
 
-                                    <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Tabungan') ?>" class="nav-link">
+                                    <!-- <li class="nav-item has-treeview">
+                                        <a href="<?php //echo base_url('Tabungan') ?>" class="nav-link">
                                             <p>Transaksi Tabungan</p>
                                         </a>
-                                    </li>
+                                    </li> -->
 
                                     <li class="nav-item has-treeview">
                                         <a href="<?= base_url('PendidikanTerakhir') ?>" class="nav-link">
@@ -421,7 +421,7 @@ $db = \Config\Database::connect();
             });
         })
     </script>
-
+    <?= $this->renderSection('script') ?>
 </body>
 
 </html>
