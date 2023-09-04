@@ -36,15 +36,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $n = 1;
+                            foreach ($lembaga as $key => $value):
+                        ?>
                         <tr>
-                            <td>No</td>
-                            <td>Nama Lembaga</td>
-                            <td>Alamat</td>
-                            <td>Telp</td>
+                            <td><?= $n++; ?></td>
+                            <td><?= $value['nama_lembaga']; ?></td>
+                            <td><?= $value['alamat']; ?></td>
+                            <td><?= $value['telp']; ?></td>
                             <td>
-                                <a href="<?= base_url('TransaksiLembaga/detailTransaksiLembaga') ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
+                                <a href="<?= base_url('TransaksiLembaga/detailTransaksiLembaga/'.$value['id_lembaga']) ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
+                        <?php $n++; endforeach; ?>
                     </tbody>
                 </table>
             </div>

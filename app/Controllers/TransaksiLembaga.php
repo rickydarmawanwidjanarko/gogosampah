@@ -8,6 +8,8 @@ use App\Models\ModelNasabah;
 use App\Models\ModelTabungan;
 use App\Models\ModelJenisSampah;
 use App\Models\ModelHargaSampah;
+use App\Models\ModelOrderSampah;
+use App\Models\ModelLembaga;
 
 class TransaksiLembaga extends BaseController
 {
@@ -18,6 +20,9 @@ class TransaksiLembaga extends BaseController
         $this->ModelTabungan = new ModelTabungan();
         $this->ModelJenisSampah = new ModelJenisSampah();
         $this->ModelHargaSampah = new ModelHargaSampah();
+        $this->ModelOrderSampah = new ModelOrderSampah();
+        $this->ModelLembaga = new ModelLembaga();
+        
         helper('form');
     }
 
@@ -26,10 +31,11 @@ class TransaksiLembaga extends BaseController
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Transaksi Lembaga',
-            'transaksilembaga' => $this->ModelTransaksiSampah->getAllData(),
+            'lembaga' => $this->ModelLembaga->getAllData(),
             'nasabah' => $this->ModelNasabah->getAllData(),
             'jenissampah' => $this->ModelJenisSampah->getAllData(),
         ];
+        
         return view('v_TransaksiLembaga', $data);
     }
 
@@ -90,11 +96,18 @@ class TransaksiLembaga extends BaseController
         return redirect()->to('/TransaksiSampah/detailTransaksiSampah/' . $id_nasabah);
     }
 
-    public function detailTransaksiLembaga()
+    public function detailTransaksiLembaga($id_lembaga)
     {
+        $lembaga = $this->ModelLembaga->detailData($id_lembaga);
+        $order_lembaga = $this->ModelOrderSampah->getDataBylembaga($id_lembaga);
+        $jenis_sampah = $this->ModelJenisSampah->getAllData();
+        
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Order Lembaga',
+            'lembaga' => $lembaga,
+            'order_lembaga' => $order_lembaga,
+            'jenis_sampah' => $jenis_sampah
         ];
         // dd($data);
         return view('v_detailTransaksiLembaga', $data);
@@ -110,6 +123,41 @@ class TransaksiLembaga extends BaseController
         return view('v_detailOrderLembaga', $data);
     }
 
+    public function ajaxStokJenis() {
+        $jenis_sampah = $this->ModelTransaksiSampah->getAllData([
+            'tbl_transaksi_sampah.id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
+            'jenis' => 2
+        ]);
+
+        $berat = 0;
+        foreach ($jenis_sampah as $key => $value) {
+            $berat += $value['jumlah'];
+        }
+
+        return json_encode(['data' => $berat]);
+    }
+
+    public function ajaxOrder() {
+        $id_lembaga = $this->request->getPost('id_lembaga');
+        $arr_jenis_sampah = $this->request->getPost('arr_jenis_sampah');
+        $arr_berat = $this->request->getPost('arr_berat');
+        
+        $insertOrder = $this->ModelLembaga->insertOrder($id_lembaga, $arr_jenis_sampah, $arr_berat);
+
+        if (!$insertOrder) {
+            $data = [
+                'success' => false,
+                'data' => 'Terjadi kesalahan !'
+            ];
+        } else {
+            $data = [
+                'success' => true,
+                'data' => 'Berhasil diinsert !'
+            ];
+        }
+
+        return json_encode($data);
+    }
 
     public function deleteData($id_transaksi_sampah)
     {
