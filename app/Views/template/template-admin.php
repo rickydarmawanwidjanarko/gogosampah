@@ -11,6 +11,7 @@ $db = \Config\Database::connect();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="<?= base_url() ?>/logo/logo.png" rel="icon">
     <title><?= $title ?> - <?= $subtitle ?></title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -145,13 +146,14 @@ $db = \Config\Database::connect();
                                     </li>
 
                                     <!-- <li class="nav-item has-treeview">
-                                        <a href="<?php //echo base_url('Tabungan') ?>" class="nav-link">
+                                        <a href="<?php //echo base_url('Tabungan') 
+                                                    ?>" class="nav-link">
                                             <p>Transaksi Tabungan</p>
                                         </a>
                                     </li> -->
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('PendidikanTerakhir') ?>" class="nav-link">
+                                        <a href="<?= base_url('TransaksiLembaga') ?>" class="nav-link">
                                             <p>Transaksi Lembaga</p>
                                         </a>
                                     </li>

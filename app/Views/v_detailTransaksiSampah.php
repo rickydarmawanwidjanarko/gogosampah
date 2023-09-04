@@ -26,7 +26,7 @@
                 <th>Total Saldo</th>
                 <th>:</th>
                 <td>
-                    <?= $nasabah['saldo']; ?>
+                    <?= format_rupiah($nasabah['saldo']); ?>
                 </td>
             </tr>
         </table>
@@ -43,14 +43,15 @@
         </div>
         <div class="card-body">
             <table id="example2" class="table table-bordered table-striped">
-                <tr>
-                    <th>#</th>
-                    <th>Tanggal Transaksi Sampah</th>
-                    <th>Jenis Transaksi</th>
-                    <th>Jenis Sampah</th>
-                    <th>Jumlah</th>
-                    <!-- <th>Action</th> -->
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tanggal Transaksi Sampah</th>
+                        <th>Jenis Transaksi</th>
+                        <th>Jenis Sampah</th>
+                        <th>Berat</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
@@ -71,21 +72,20 @@
                                 } ?></td>
                             <td><?= $value['jenis_sampah'] ?></td>
                             <td>
-                                <?php 
-                                    if ($value['jenis'] == 2) {
-                                        echo $value['jumlah'].' Kg';
-                                    } else {
-                                        echo format_rupiah($value['jumlah']);
-                                    }
+                                <?php
+                                if ($value['jenis'] == 2) {
+                                    echo $value['jumlah'] . ' Kg';
+                                } else {
+                                    echo format_rupiah($value['jumlah']);
+                                }
                                 ?>
                             </td>
-                            <!-- <td>
-                                <button class="btn btn-flat btn-warning btn-xs" data-toggle="modal" data-target="#edit<?= $value['id_transaksi_sampah'] ?>"><i class="fas fa-edit"></i></button>
-                            </td> -->
+                            <td>
+                                <a href=" <?= base_url('PdfController/view_pdf') ?>/<?= $value['id_nasabah'] ?>"><i class="fas fa-paper-plane"></i></a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-
             </table>
         </div>
     </div>
@@ -111,25 +111,29 @@
                     <label>Tanggal Transaksi Sampah</label>
                     <input type="text" name="created_at" value="<?= $dibuat_tgl ?>" class="form-control" readonly>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Jenis Transaksi</label>
-                        <select name="jenis" class="form-control sel-jenis">
-                            <option value="">--Pilih Jenis Transaksi--</option>
-                            <option value="1">Debit</option>
-                            <option value="2">Kredit</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label>Jenis Sampah</label>
-                        <select name="id_jenis_sampah" class="form-control">
-                            <option value="0">--Pilih Jenis Sampah--</option>
-                            <?php foreach ($jenissampah as $key => $value) { ?>
-                                <option value="<?= $value['id_jenis_sampah'] ?>"><?= $value['jenis_sampah'] ?></option>
-                            <?php } ?>
-                        </select>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Jenis Transaksi</label>
+                                <select name="jenis" class="form-control sel-jenis">
+                                    <option value="">--Pilih Jenis Transaksi--</option>
+                                    <option value="1">Debit</option>
+                                    <option value="2">Kredit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Jenis Sampah</label>
+                                <select name="id_jenis_sampah" class="form-control">
+                                    <option value="0">--Pilih Jenis Sampah--</option>
+                                    <?php foreach ($jenissampah as $key => $value) { ?>
+                                        <option value="<?= $value['id_jenis_sampah'] ?>"><?= $value['jenis_sampah'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -160,67 +164,6 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
-<!-- Modal Edit -->
-<?php foreach ($transaksisampah as $key => $value) { ?>
-    <div class="modal fade" id="edit<?= $value['id_transaksi_sampah'] ?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Transaksi Sampah</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <?php echo form_open('TransaksiSampah/editData/' . $value['id_transaksi_sampah']);
-                helper('text');
-                $dibuat_tgl = $value['created_at'];
-                $diubah_tgl = date('Y-m-d H:i:s');
-                ?>
-                <div class="modal-body">
-                    <input type="hidden" value="<?= $nasabah['id_nasabah']; ?>" name="id_nasabah">
-                    <input type="hidden" value="<?= $dibuat_tgl; ?>" name="created_at">
-                    <div class="form-group">
-                        <label>Diubah Tanggal</label>
-                        <input type="text" name="updated_at" value="<?= $diubah_tgl ?>" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Jenis Transaksi Sampah</label>
-                        <select name="jenis" class="form-control sel-jenis" required>
-                            <option value="1" <?= $value['jenis'] == 'Debit' ? 'selected' : '' ?>>Debit</option>
-                            <option value="2" <?= $value['jenis'] == 'Kredit' ? 'selected' : '' ?>>Kredit</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-
-                        <label>Jenis Sampah</label>
-                        <select name="id_jenis_sampah" class="form-control">
-                            <option value="0">--Pilih Jenis Sampah--</option>
-                            <?php
-                            foreach ($jenissampah as $key => $s) { ?>
-                                <option value="<?= $s['id_jenis_sampah'] ?>" <?= $s['id_jenis_sampah'] == $value['id_jenis_sampah'] ? 'selected' : '' ?>>
-                                    <?= $s['jenis_sampah'] ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nominal</label>
-                        <input name="jumlah" value="<?= $value['jumlah'] ?>" class="form-control" placeholder="Nominal" required>
-                    </div>
-
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                </div>
-                <?php echo form_close() ?>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-<?php } ?>
 
 <!-- Modal Delete -->
 <?php foreach ($transaksisampah as $key => $value) { ?>
