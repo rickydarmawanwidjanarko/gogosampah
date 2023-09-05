@@ -10,15 +10,8 @@ class ModelNasabah extends Model
     {
         return $this->db->table('tbl_nasabah')
             ->join('tbl_level', 'tbl_level.id_level = tbl_nasabah.id_level ', 'left')
+            ->join('tbl_agama', 'tbl_agama.id_agama = tbl_nasabah.id_agama ', 'left')
             ->orderBy('id_nasabah', 'ASC')
-            ->get()
-            ->getResultArray();
-    }
-
-    public function getTujuan()
-    {
-        return $this->db->table('tbl_nasabah')
-            ->where('tbl_nasabah.id_nasabah !=',  session()->get('id_nasabah'))
             ->get()
             ->getResultArray();
     }
@@ -43,10 +36,11 @@ class ModelNasabah extends Model
             ->delete($data);
     }
 
-    public function detailData($id_nasabah)
+    public function getProfile()
     {
         return $this->db->table('tbl_nasabah')
-            ->where('id_nasabah', $id_nasabah)
+            ->join('tbl_agama', 'tbl_agama.id_agama = tbl_nasabah.id_agama ', 'left')
+            ->where('id_nasabah', session()->get('id_nasabah'))
             ->get()
             ->getRowArray();
     }

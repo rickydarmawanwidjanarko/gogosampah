@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ModelNasabah;
 use App\Models\ModelLevel;
+use App\Models\ModelAgama;
 
 class Nasabah extends BaseController
 {
@@ -12,6 +13,7 @@ class Nasabah extends BaseController
     {
         $this->ModelNasabah = new ModelNasabah();
         $this->ModelLevel = new ModelLevel();
+        $this->ModelAgama = new ModelAgama();
         helper('form');
     }
 
@@ -22,6 +24,7 @@ class Nasabah extends BaseController
             'subtitle' => 'Nasabah',
             'nasabah' => $this->ModelNasabah->getAllData(),
             'level' => $this->ModelLevel->getAllData(),
+            'agama' => $this->ModelAgama->getAllData(),
         ];
         return view('v_Nasabah', $data);
     }
@@ -35,6 +38,8 @@ class Nasabah extends BaseController
             'password_nasabah' => $this->request->getPost('password_nasabah'),
             'nama_nasabah' => $this->request->getPost('nama_nasabah'),
             'id_level' => $this->request->getPost('id_level'),
+            'id_agama' => $this->request->getPost('id_agama'),
+            'jk' => $this->request->getPost('jk'),
             'nik' => $this->request->getPost('nik'),
             'telp' => $this->request->getPost('telp'),
             'alamat' => $this->request->getPost('alamat'),
@@ -57,6 +62,8 @@ class Nasabah extends BaseController
                 'password_nasabah' => $this->request->getPost('password_nasabah'),
                 'nama_nasabah' => $this->request->getPost('nama_nasabah'),
                 'id_level' => $this->request->getPost('id_level'),
+                'id_agama' => $this->request->getPost('id_agama'),
+                'jk' => $this->request->getPost('jk'),
                 'nik' => $this->request->getPost('nik'),
                 'telp' => $this->request->getPost('telp'),
                 'alamat' => $this->request->getPost('alamat'),
@@ -75,6 +82,7 @@ class Nasabah extends BaseController
                 'password_nasabah' => $this->request->getPost('password_nasabah'),
                 'nama_nasabah' => $this->request->getPost('nama_nasabah'),
                 'id_level' => $this->request->getPost('id_level'),
+                'id_agama' => $this->request->getPost('id_agama'),
                 'nik' => $this->request->getPost('nik'),
                 'telp' => $this->request->getPost('telp'),
                 'alamat' => $this->request->getPost('alamat'),

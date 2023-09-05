@@ -267,6 +267,12 @@ $db = \Config\Database::connect();
                                     </li>
 
                                     <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('Agama') ?>" class="nav-link">
+                                            <p>Data Agama</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item has-treeview">
                                         <a href="<?= base_url('Level') ?>" class="nav-link">
                                             <p>Data Level</p>
                                         </a>

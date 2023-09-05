@@ -101,7 +101,7 @@ class Auth extends BaseController
             $password_nasabah = $this->request->getPost('password_nasabah');
             $cek_login = $this->ModelAuth->login_nasabah($username_nasabah, $password_nasabah);
             if ($cek_login) {
-                session()->set('log', true);
+                session()->set('id_nasabah', $cek_login['id_nasabah']);
                 session()->set('nama_nasabah', $cek_login['nama_nasabah']);
                 session()->set('username_nasabah', $cek_login['username_nasabah']);
                 session()->set('foto', $cek_login['foto']);
@@ -120,7 +120,6 @@ class Auth extends BaseController
 
     public function logout_nasabah()
     {
-        session()->remove('log');
         session()->remove('username_nasabah');
         session()->remove('nama_nasabah');
         session()->remove('level');

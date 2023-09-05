@@ -42,6 +42,8 @@
                         <th>NIK</th>
                         <th>Nama Nasabah</th>
                         <th>Telp</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Agama</th>
                         <th>Alamat</th>
                         <th>Username</th>
                         <th>Password</th>
@@ -58,6 +60,8 @@
                             <td><?= $value['nik'] ?></td>
                             <td><?= $value['nama_nasabah'] ?></td>
                             <td><?= $value['telp'] ?></td>
+                            <td><?= $value['jk'] ?></td>
+                            <td><?= $value['agama'] ?></td>
                             <td><?= $value['alamat'] ?></td>
                             <td><?= $value['username_nasabah'] ?></td>
                             <td><?= $value['password_nasabah'] ?></td>
@@ -101,6 +105,23 @@
                 <div class="form-group">
                     <label>Telp</label>
                     <input name="telp" class="form-control" placeholder="Telp" required>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select name="jk" class="form-control">
+                        <option value="">--Pilih Jenis Kelamin--</option>
+                        <option value="L">Laki-Laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Agama</label>
+                    <select name="id_agama" class="form-control">
+                        <option value="0">--Pilih Agama--</option>
+                        <?php foreach ($agama as $key => $v) { ?>
+                            <option value="<?= $v['id_agama'] ?>"><?= $v['agama'] ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>
@@ -165,6 +186,23 @@
                         <input name="telp" value="<?= $value['telp'] ?>" class="form-control" placeholder="Telp" required>
                     </div>
                     <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select name="jk" class="form-control" required>
+                            <option value="" <?= $value['jk'] == '' ? 'selected' : '' ?>>Pilih Jenis Kelamin</option>
+                            <option value="L" <?= $value['jk'] == 'L' ? 'selected' : '' ?>>Laki-Laki</option>
+                            <option value="P" <?= $value['jk'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agama</label>
+                        <select name="id_agama" class="form-control">
+                            <option value="<?= $value['id_agama'] ?>"><?= $value['agama'] ?></option>
+                            <?php foreach ($agama as $key => $v) { ?>
+                                <option value="<?= $v['id_agama'] ?>"><?= $v['agama'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Alamat</label>
                         <input name="alamat" value="<?= $value['alamat'] ?>" class="form-control" placeholder="Alamat" required>
                     </div>
@@ -175,6 +213,15 @@
                     <div class="form-group">
                         <label>Password</label>
                         <input name="password_nasabah" value="<?= $value['password_nasabah'] ?>" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select name="id_level" class="form-control">
+                            <option value="<?= $value['id_level'] ?>"><?= $value['level'] ?></option>
+                            <?php foreach ($level as $key => $l) { ?>
+                                <option value="<?= $l['id_level'] ?>"><?= $l['level'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
@@ -188,16 +235,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <br>
-                        <label>Level</label>
-                        <select name="id_level" class="form-control">
-                            <option value="<?= $value['id_level'] ?>"><?= $value['level'] ?></option>
-                            <?php foreach ($level as $key => $value) { ?>
-                                <option value="<?= $value['id_level'] ?>"><?= $value['level'] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+
 
                 </div>
                 <div class="modal-footer justify-content-between">
