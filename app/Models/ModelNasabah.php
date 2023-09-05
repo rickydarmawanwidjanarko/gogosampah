@@ -36,6 +36,14 @@ class ModelNasabah extends Model
             ->delete($data);
     }
 
+    public function detailData($id_nasabah)
+    {
+        return $this->db->table('tbl_nasabah')
+            ->where('id_nasabah', $id_nasabah)
+            ->get()
+            ->getRowArray();
+    }
+
     public function getProfile()
     {
         return $this->db->table('tbl_nasabah')
