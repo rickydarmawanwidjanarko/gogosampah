@@ -29,12 +29,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 order-md-2">
-          <img src="<?= base_url() ?>/logo/BG gogogreen.png" alt="Image" class="img-fluid">
+          <img src="<?= base_url() ?>/logo/BG.png" class="img-fluid" width="75%" height="75%">
         </div>
         <div class="col-md-6 contents">
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
+                <br><br><br>
                 <h3>Silahkan Login <strong></strong></h3>
                 <p class="mb-4">Pastikan <b style="color: #38d39f;">Username</b> dan <b style="color: #38d39f;">Password</b> telah sesuai.</p>
               </div>
@@ -68,7 +69,6 @@
                 <p class="text-danger"><?= $validation->hasError('password_nasabah') ? $validation->getError('password_nasabah') : '' ?></p>
               </div>
               <input type="submit" value="Log In" class="btn text-white btn-block btn-primary">
-              </form>
               <? echo form_close() ?>
             </div>
           </div>

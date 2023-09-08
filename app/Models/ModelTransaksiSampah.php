@@ -9,9 +9,9 @@ class ModelTransaksiSampah extends Model
     public function getAllData($where = [])
     {
         $query = $this->db->table('tbl_transaksi_sampah')
-        ->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_transaksi_sampah.nasabah_id ', 'left')
-        ->join('tbl_jenis_sampah', 'tbl_jenis_sampah.id_jenis_sampah = tbl_transaksi_sampah.id_jenis_sampah ', 'left')
-        ->orderBy('id_transaksi_sampah', 'ASC');
+            ->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_transaksi_sampah.nasabah_id ', 'left')
+            ->join('tbl_jenis_sampah', 'tbl_jenis_sampah.id_jenis_sampah = tbl_transaksi_sampah.id_jenis_sampah ', 'left')
+            ->orderBy('id_transaksi_sampah', 'ASC');
 
         if (!empty($where)) {
             $query->where($where);

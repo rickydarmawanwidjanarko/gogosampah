@@ -159,7 +159,7 @@ $db = \Config\Database::connect();
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('UnitKerja') ?>" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <p>Transaksi Pelanggan</p>
                                         </a>
                                     </li>
@@ -200,19 +200,19 @@ $db = \Config\Database::connect();
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <p>
-                                        Stok Pupuk
+                                        Pupuk
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Agama') ?>" class="nav-link">
-                                            <p>Stok Masuk</p>
+                                        <a href="Pupuk" class="nav-link">
+                                            <p>Stock Pupuk</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Institusi') ?>" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <p>Stok Keluar</p>
                                         </a>
                                     </li>
@@ -227,19 +227,19 @@ $db = \Config\Database::connect();
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Agama') ?>" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <p>Laporan Penjualan Pupuk</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Institusi') ?>" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <p>Laporan Transaksi Lembaga</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="<?= base_url('Institusi') ?>" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <p>Laporan Transaksi Nasabah</p>
                                         </a>
                                     </li>
@@ -257,6 +257,12 @@ $db = \Config\Database::connect();
                                     <li class="nav-item has-treeview">
                                         <a href="<?= base_url('JenisSampah') ?>" class="nav-link">
                                             <p>Jenis Sampah</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('JenisPupuk') ?>" class="nav-link">
+                                            <p>Jenis Pupuk</p>
                                         </a>
                                     </li>
 
@@ -429,6 +435,7 @@ $db = \Config\Database::connect();
             });
         })
     </script>
+
     <?= $this->renderSection('script') ?>
 </body>
 

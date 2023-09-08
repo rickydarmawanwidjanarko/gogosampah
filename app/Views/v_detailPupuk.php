@@ -1,38 +1,6 @@
 <?= $this->extend('template/template-admin') ?>
 <?= $this->section('content') ?>
-<a href="<?= base_url('TransaksiSampah') ?>" class="btn btn-success"><i class="fas fa-arrow-left"></i> Back</a>
-<br>
-<br>
-<div class="row">
-    <div class="col-sm-12">
-        <table class="table table-bordered">
-            <tr>
-                <th width="100px">Nasabah</th>
-                <th width="30px">:</th>
-                <td><?= $nasabah['nama_nasabah'] ?></td>
-                <th width="180px">NIK</th>
-                <th width="30px">:</th>
-                <td><?= $nasabah['nik'] ?></td>
-            </tr>
-            <tr>
-                <th width="120px">Telp</th>
-                <th>:</th>
-                <td><?= $nasabah['telp'] ?></td>
-                <th>Alamat</th>
-                <th>:</th>
-                <td><?= $nasabah['alamat'] ?></td>
-            </tr>
-            <tr>
-                <th>Total Saldo</th>
-                <th>:</th>
-                <td>
-                    <?= format_rupiah($nasabah['saldo']); ?>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
+<a href="<?= base_url('Pupuk') ?>" class="btn btn-success"><i class="fas fa-arrow-left"></i> Back</a>
 <div class="col-sm-12">
     <div class="card card-success">
         <div class="card-header">
@@ -46,42 +14,21 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tanggal Transaksi Sampah</th>
-                        <th>Jenis Transaksi</th>
-                        <th>Jenis Sampah</th>
-                        <th>Berat</th>
+                        <th>Tanggal Pupuk Masuk</th>
+                        <th>Total Karung</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
-                    foreach ($transaksisampah as $key => $value) : ?>
+                    foreach ($pupuk as $key => $value) : ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $value['created_at'] ?></td>
-                            <td><?php switch ($value['jenis']) {
-                                    case '1':
-                                        echo 'Debit';
-                                        break;
-                                    case '2':
-                                        echo 'Kredit';
-                                        break;
-                                    default:
-                                        echo '';
-                                        break;
-                                } ?></td>
+                            <td><?= $value['tgl_masuk'] ?></td>
                             <td><?= $value['jenis_sampah'] ?></td>
+                            <td><?= $value['jumlah_masuk'] ?></td>
                             <td>
-                                <?php
-                                if ($value['jenis'] == 2) {
-                                    echo $value['jumlah'] . ' Kg';
-                                } else {
-                                    echo format_rupiah($value['jumlah']);
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <a href=" <?= base_url('PdfController/view_pdf') ?>/<?= $value['id_nasabah'] ?>"><i class="fas fa-paper-plane"></i></a>
+                                <a href=" <?= base_url('PdfController/view_pdf') ?>/<?= $value['id_pupuk'] ?>"><i class="fas fa-paper-plane"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -96,12 +43,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Transaksi Sampah</h4>
+                <h4 class="modal-title">Tambah Pupuk Masuk</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php echo form_open_multipart('TransaksiSampah/insertData');
+            <?php echo form_open_multipart('Pupuk/insertData');
             helper('text');
             $dibuat_tgl = date('Y-m-d H:i:s');
             ?>
@@ -169,7 +116,7 @@
 </div>
 
 <!-- Modal Delete -->
-<?php foreach ($transaksisampah as $key => $value) { ?>
+<?php foreach ($pupuk as $key => $value) { ?>
     <div class="modal fade" id="delete<?= $value['id_transaksi_sampah'] ?>">
         <div class="modal-dialog">
             <div class="modal-content">

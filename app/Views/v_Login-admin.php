@@ -19,9 +19,9 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <!-- /.login-logo -->
-    <div class="card card-outline card-navy">
+    <div class="card card-outline card-success">
       <div class="card-header text-center">
-        <h4 style="color: #001f3f;"><b><?= $title ?></h4></b>
+        <h4 style="color: #28a745;"><b><?= $title ?></h4></b>
         <h6><?= $subtitle ?></h6>
       </div>
 
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-success btn-block">Sign In</button>
           </div>
           <!-- /.col -->
         </div>

@@ -69,13 +69,14 @@
                                     <th>Total Saldo</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <?php $no = 1;
                                 foreach ($transaksisampah as $key => $value) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $transaksisampah[0]['jenis_sampah'] ?></td>
-                                        <td><?= $transaksisampah[0]['jumlah'] ?> Kg</td>
+                                        <td><?= $value['jenis_sampah'] ?></td>
+                                        <td><?= $value['jumlah'] ?> Kg</td>
                                         <td>Rp. Harga</td>
                                         <td>Rp. <?= $nasabah['saldo'] ?></td>
                                     </tr>
