@@ -90,9 +90,9 @@
                                 <select name="id_jenis_sampah" class="form-control sel-jenis">
                                     <option value="0">--Pilih Jenis Sampah--</option>
                                     <?php
-                                        foreach ($jenis_sampah as $key => $vj) :
+                                    foreach ($jenis_sampah as $key => $vj) :
                                     ?>
-                                    <option value="<?= $vj['id_jenis_sampah']; ?>"><?= $vj['jenis_sampah']; ?></option>
+                                        <option value="<?= $vj['id_jenis_sampah']; ?>"><?= $vj['jenis_sampah']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -159,7 +159,6 @@
 
 <?= $this->section('script') ?>
 <script>
-    
     $(document).on('change', '.sel-jenis', function(e) {
         let v = $(this).val();
         let currentRow = $(this).closest('.canvas-order, .canvas-order-template');
@@ -167,9 +166,11 @@
         $.ajax({
             type: "POST",
             url: "<?= base_url('TransaksiLembaga/ajaxStokJenis'); ?>",
-            data: {id_jenis_sampah: v},
+            data: {
+                id_jenis_sampah: v
+            },
             dataType: "json",
-            success: function (data) {
+            success: function(data) {
                 // Set value untuk .txt-stok-berat di dalam row yang sama
                 currentRow.find('.txt-stok-berat').val(data.data);
             },
@@ -182,8 +183,8 @@
 
     $('.btn-add').click(function(e) {
         e.preventDefault()
-        const canvasOrderTemplate  = $('.canvas-order-template:last').clone();
-        canvasOrderTemplate .find('input').val('');
+        const canvasOrderTemplate = $('.canvas-order-template:last').clone();
+        canvasOrderTemplate.find('input').val('');
 
         canvasOrderTemplate.removeClass('canvas-order-template').addClass('canvas-order');
 
@@ -217,11 +218,11 @@
             url: "<?= base_url('TransaksiLembaga/ajaxOrder'); ?>",
             data: {
                 id_lembaga: '<?= $lembaga['id_lembaga']; ?>',
-                arr_jenis_sampah: arr_jenis_sampah, 
-                arr_berat: arr_berat 
+                arr_jenis_sampah: arr_jenis_sampah,
+                arr_berat: arr_berat
             },
             dataType: "json",
-            success: function (data) {
+            success: function(data) {
 
                 if (data.success) {
                     alert(data.data);

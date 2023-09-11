@@ -159,7 +159,7 @@ $db = \Config\Database::connect();
                                     </li>
 
                                     <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
+                                        <a href="<?= base_url('TransaksiPelanggan') ?>" class="nav-link">
                                             <p>Transaksi Pelanggan</p>
                                         </a>
                                     </li>
@@ -206,14 +206,8 @@ $db = \Config\Database::connect();
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item has-treeview">
-                                        <a href="Pupuk" class="nav-link">
+                                        <a href="<?= base_url('Pupuk') ?>" class="nav-link">
                                             <p>Stock Pupuk</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item has-treeview">
-                                        <a href="#" class="nav-link">
-                                            <p>Stok Keluar</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -268,7 +262,13 @@ $db = \Config\Database::connect();
 
                                     <li class="nav-item has-treeview">
                                         <a href="<?= base_url('SettingHarga') ?>" class="nav-link">
-                                            <p>Setting Harga</p>
+                                            <p>Setting Harga Sampah</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item has-treeview">
+                                        <a href="<?= base_url('SettingHargaPupuk') ?>" class="nav-link">
+                                            <p>Setting Harga Pupuk</p>
                                         </a>
                                     </li>
 

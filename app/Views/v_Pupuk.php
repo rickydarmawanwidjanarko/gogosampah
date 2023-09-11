@@ -20,7 +20,6 @@
                         <th>Nama Pupuk</th>
                         <th>Tgl Setor</th>
                         <th>Jumlah Setor</th>
-                        <th width="100px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +31,6 @@
                             <td><?= $value['jenis_pupuk'] ?></td>
                             <td><?= $value['tgl_masuk'] ?></td>
                             <td><?= $value['jumlah_masuk'] ?></td>
-                            <td>
-                                <a href="<?= base_url('Pupuk/detailPupuk') ?>/<?= $value['id_pupuk'] ?>" class="btn btn-flat btn-primary btn-xs"><i class="fas fa-eye"></i></a>
-                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -1,6 +1,6 @@
 <?= $this->extend('template/template-admin') ?>
 <?= $this->section('content') ?>
-<a href="<?= base_url('TransaksiLembaga') ?>" class="btn btn-success"><i class="fas fa-arrow-left"></i> Back</a>
+<a href="<?= base_url('TransaksiPelanggan') ?>" class="btn btn-success"><i class="fas fa-arrow-left"></i> Back</a>
 <br>
 <br>
 <div class="col-sm-12">
@@ -19,7 +19,7 @@
                         <th>No. Order</th>
                         <th>Tanggal Order</th>
                         <th>Jenis Transaksi</th>
-                        <th>Berat</th>
+                        <th>Quantity</th>
                         <th>Harga</th>
                         <th>Action</th>
                     </tr>
@@ -30,10 +30,10 @@
                         <td>No. Order</td>
                         <td>Tgl order</td>
                         <td>Debit</td>
-                        <td>Berat</td>
+                        <td>Quantity</td>
                         <td>Total harga</td>
                         <td>
-                            <a href=" <?= base_url('TransaksiLembaga/detailOrderLembaga') ?>"><i class="btn btn-sm btn-info fas fa-eye"></i></a>
+                            <a href=" <?= base_url('TransaksiPelanggan/detailOrderPelanggan') ?>"><i class="btn btn-sm btn-info fas fa-eye"></i></a>
                             <a href=" <?= base_url('PdfController/view_pdf') ?>"><i class="btn btn-sm btn-warning fas fa-paper-plane"></i></a>
                         </td>
                     </tr>

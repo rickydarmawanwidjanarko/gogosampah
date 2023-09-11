@@ -22,7 +22,7 @@ class TransaksiLembaga extends BaseController
         $this->ModelHargaSampah = new ModelHargaSampah();
         $this->ModelOrderSampah = new ModelOrderSampah();
         $this->ModelLembaga = new ModelLembaga();
-        
+
         helper('form');
     }
 
@@ -35,7 +35,7 @@ class TransaksiLembaga extends BaseController
             'nasabah' => $this->ModelNasabah->getAllData(),
             'jenissampah' => $this->ModelJenisSampah->getAllData(),
         ];
-        
+
         return view('v_TransaksiLembaga', $data);
     }
 
@@ -101,7 +101,7 @@ class TransaksiLembaga extends BaseController
         $lembaga = $this->ModelLembaga->detailData($id_lembaga);
         $order_lembaga = $this->ModelOrderSampah->getDataBylembaga($id_lembaga);
         $jenis_sampah = $this->ModelJenisSampah->getAllData();
-        
+
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Order Lembaga',
@@ -123,7 +123,8 @@ class TransaksiLembaga extends BaseController
         return view('v_detailOrderLembaga', $data);
     }
 
-    public function ajaxStokJenis() {
+    public function ajaxStokJenis()
+    {
         $jenis_sampah = $this->ModelTransaksiSampah->getAllData([
             'tbl_transaksi_sampah.id_jenis_sampah' => $this->request->getPost('id_jenis_sampah'),
             'jenis' => 2
@@ -137,11 +138,12 @@ class TransaksiLembaga extends BaseController
         return json_encode(['data' => $berat]);
     }
 
-    public function ajaxOrder() {
+    public function ajaxOrder()
+    {
         $id_lembaga = $this->request->getPost('id_lembaga');
         $arr_jenis_sampah = $this->request->getPost('arr_jenis_sampah');
         $arr_berat = $this->request->getPost('arr_berat');
-        
+
         $insertOrder = $this->ModelLembaga->insertOrder($id_lembaga, $arr_jenis_sampah, $arr_berat);
 
         if (!$insertOrder) {

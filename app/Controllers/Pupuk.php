@@ -80,9 +80,9 @@ class Pupuk extends BaseController
         return redirect()->to('/StockPupuk');
     }
 
-    public function detailPupuk($id_stock_pupuk)
+    public function detailPupuk($id_jenis_pupuk)
     {
-        $data_pupuk = $this->ModelPupuk->detailData($id_stock_pupuk);
+        $data_pupuk = $this->ModelPupuk->detailData($id_jenis_pupuk);
         $data = [
             'title' => 'Gogogreen',
             'subtitle' => 'Data Pupuk',
